@@ -215,9 +215,10 @@
                                                     <a href="#" class="text-gray-400 hover:text-gray-100 mx-2">
                                                         <i class="material-icons-outlined text-base">edit</i>
                                                     </a>
-                                                    <a href="#" class="text-gray-400 hover:text-gray-100 ml-2">
+                                                    <p data-id="1"
+                                                        class="inline-block cursor-pointer btn-delete text-gray-400 hover:text-gray-100 ml-2">
                                                         <i class="material-icons-round text-base">delete_outline</i>
-                                                    </a>
+                                                    </p>
                                                 </td>
                                             </tr>
 
@@ -306,7 +307,7 @@
 
     <!-- Modal add noti -->
     <form action="">
-        <div class="main-modal fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster"
+        <div class="main-modal-create fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster"
             style="background: rgba(0,0,0,.7);">
             <div
                 class="border border-teal-500 shadow-lg modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
@@ -314,7 +315,7 @@
                     <!--Title-->
                     <div class="flex justify-between items-center pb-3">
                         <p class="text-2xl font-bold">Add new notification</p>
-                        <div class="modal-close cursor-pointer z-50">
+                        <div class="modal-close-create cursor-pointer z-50">
                             <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18"
                                 height="18" viewBox="0 0 18 18">
                                 <path
@@ -357,7 +358,7 @@
                     <!--Footer-->
                     <div class="flex justify-end pt-2">
                         <button
-                            class="focus:outline-none modal-close px-4 bg-gray-400 p-2 rounded-md text-black hover:bg-gray-300">Cancel</button>
+                            class="focus:outline-none modal-close-create px-4 bg-gray-400 p-2 rounded-md text-black hover:bg-gray-300">Cancel</button>
                         <button
                             class="focus:outline-none px-4 bg-blue-500 p-2 ml-3 rounded-md text-white hover:bg-blue-400">Add</button>
                     </div>
@@ -365,40 +366,77 @@
             </div>
         </div>
     </form>
+
+    <!-- Modal Delete noti -->
+    <div class="main-modal-delete fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster"
+        style="background: rgba(0,0,0,.7);">
+        <div
+            class="border border-teal-500 modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+            <div class="modal-content py-4 text-left px-6">
+                <!--Title-->
+                <div class="flex justify-between items-center pb-3">
+                    <p class="text-2xl font-bold">Add new notification</p>
+                    <div class="modal-close-delete cursor-pointer z-50">
+                        <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                            viewBox="0 0 18 18">
+                            <path
+                                d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+                            </path>
+                        </svg>
+                    </div>
+                </div>
+                <!--Body-->
+                <div class="my-5">
+                    Are you sure want to delete this notification?
+                </div>
+                <!--Footer-->
+                <div class="flex justify-end pt-2">
+                    <button
+                        class="focus:outline-none modal-close-delete px-4 bg-gray-400 p-2 rounded-md text-black hover:bg-gray-300">Cancel</button>
+                    <a href="#"
+                        class="btn-delete-noti focus:outline-none px-4 bg-blue-500 p-2 ml-3 rounded-md text-white hover:bg-blue-400">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../index.js" />
+    </script>
     <script>
-        const modal = document.querySelector('.main-modal');
-        const closeButton = document.querySelectorAll('.modal-close');
+        const modalCreate = document.querySelector('.main-modal-create');
+        const modalDelete = document.querySelector('.main-modal-delete');
 
-        let btnAddNoti = document.getElementById('btn-add-noti')
+        const closeButtonModalCreate = document.querySelectorAll('.modal-close-create');
+        const closeButtonModalDelete = document.querySelectorAll('.modal-close-delete');
+
+        const deletes = document.querySelectorAll(".btn-delete")
+        const btnAddNoti = document.getElementById('btn-add-noti')
+
+        const btnDeleteNoti = document.querySelector('.btn-delete-noti')
+
+        initModal([
+            { modal: modalCreate, closeButtons: closeButtonModalCreate },
+            { modal: modalDelete, closeButtons: closeButtonModalDelete },
+        ])
+
         btnAddNoti.addEventListener("click", (e) => {
-            openModal()
+            openModal(modalCreate)
         })
-        const modalClose = () => {
-            modal.classList.remove('fadeIn');
-            modal.classList.add('fadeOut');
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 500);
+
+        deletes.forEach(item => {
+            item.addEventListener("click", e => {
+                openModal(modalDelete)
+                setDataToDeleteModal(item)
+            })
+        })
+
+        function setDataToDeleteModal(item) {
+            console.log(item);
+            const id = item.getAttribute("data-id")
+            btnDeleteNoti.href = "/admin/delete/" + id
         }
 
-        const openModal = () => {
-            modal.classList.remove('fadeOut');
-            modal.classList.add('fadeIn');
-            modal.style.display = 'flex';
-        }
 
-        for (let i = 0; i < closeButton.length; i++) {
-
-            const elements = closeButton[i];
-
-            elements.onclick = (e) => modalClose();
-
-            modal.style.display = 'none';
-
-            window.onclick = function (event) {
-                if (event.target == modal) modalClose();
-            }
-        }
     </script>
 </body>
 
