@@ -42,7 +42,7 @@
                         <a href="./profile.html">Your profile</a>
                     </li>
                     <li class="header__dropdown-item">
-                        <a href="#!">Change password</a>
+                        <a class="change__pass-btn" href="#!">Change password</a>
                     </li>
                     <li class="header__dropdown-item">
                         <a href="#!">Logout</a>
@@ -50,8 +50,43 @@
                 </ul>
             </div>
         </header>
-        <main>
-            Trang Home
+        <!-- Modal doi mat khau -->
+        <div class="overlay" id="overlay"></div>
+        <div class="modal" id="modal">
+            <button class="modal-close-btn" id="close-btn"> &times</button>
+            <h3>Change your password</h3>
+            <form action="" class="modal__content">
+                <div class="text-field">
+                    <label for="username3">Current password</label>
+                    <input autocomplete="off" type="text" id="username3" placeholder="Current password" />
+                </div>
+                <div class="text-field">
+                    <label for="username3">New password</label>
+                    <input autocomplete="off" type="text" id="username3" placeholder="New password" />
+                </div>
+                <div class="text-field">
+                    <label for="username3">Repeat</label>
+                    <input autocomplete="off" type="text" id="username3" placeholder="Repeat" />
+                </div>
+                <button class="btn__save">Save</button>
+            </form>
+        </div>
+        <!-- Ket Thuc Modal  -->
+        <main class="home">
+            <h2>
+                Student portal
+            </h2>
+            <div class="home__content">
+
+                <div class="home__left">
+                    <h1>Lorem ipsum dolor sit amet consectetur adipisicing.</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Blanditiis iusto asperiores, beatae
+                        vitae labore ratione inventore tenetur quam dolorum velit!</p>
+                </div>
+                <div class="home__right">
+                    <img src="./images/school.png" alt="">
+                </div>
+            </div>
         </main>
     </div>
     <script src="./js/main.js"></script>

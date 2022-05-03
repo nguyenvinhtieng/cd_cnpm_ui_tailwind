@@ -34,3 +34,22 @@ switchThemeButton.addEventListener("change", (e) => {
         localStorage.setItem("theme", "light");
     }
 });
+
+// Modal change pass
+const btnChangePass = document.querySelector(".change__pass-btn");
+const overlay = document.getElementById("overlay");
+const modal = document.getElementById("modal");
+
+btnChangePass.addEventListener("click", function () {
+    overlay.classList.add("is-visible");
+    modal.classList.add("is-visible");
+});
+
+document.getElementById("close-btn").addEventListener("click", function () {
+    overlay.classList.remove("is-visible");
+    modal.classList.remove("is-visible");
+});
+overlay.addEventListener("click", function () {
+    overlay.classList.remove("is-visible");
+    modal.classList.remove("is-visible");
+});
